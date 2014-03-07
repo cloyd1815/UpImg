@@ -53,7 +53,7 @@ public class Main extends JFrame implements ActionListener {
 			BufferedImage capture = null;
 			try {
 				capture = new Robot().createScreenCapture(screenRect);
-				File file = new File("Screenshot");
+				File file = File.createTempFile("screenshot", ".png");
 				ImageIO.write(capture, "png", file);
 				UpImg.upimg(file);
 			} catch (IOException | AWTException | URISyntaxException e1) {
