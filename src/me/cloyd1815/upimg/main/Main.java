@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -16,12 +17,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import me.cloyd1815.upimg.UpImg;
+
 public class Main extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	JPanel panel;
-	JButton button;
-	JLabel label;
+	public static JPanel panel;
+	public static JButton button;
+	public static JLabel label;
 	public static Main window;
 	
 	public Main() {
@@ -50,11 +53,10 @@ public class Main extends JFrame implements ActionListener {
 			BufferedImage capture = null;
 			try {
 				capture = new Robot().createScreenCapture(screenRect);
-				File temp = File.createTempFile("Screenshot", ".png");
-				ImageIO.write(capture, "png", temp);
-				temp.deleteOnExit();
-			} catch (IOException | AWTException e1) {
-				// TODO Auto-generated catch block
+				File file = new File("Screenshot");
+				ImageIO.write(capture, "png", file);
+				UpImg.upimg(file);
+			} catch (IOException | AWTException | URISyntaxException e1) {
 				e1.printStackTrace();
 			}
 		}
