@@ -3,6 +3,7 @@ package me.cloyd1815.upimg;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -36,5 +37,10 @@ public class UpImg {
 	        StringSelection selection = new StringSelection(upimg);
 	        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	        clipboard.setContents(selection, selection);
+	}
+	
+	public BufferedImage resize(BufferedImage image) {
+		
+		return image;
 	}
 }
