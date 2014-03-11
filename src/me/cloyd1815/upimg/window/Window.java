@@ -26,13 +26,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.UIManager;
 
 import me.cloyd1815.upimg.UpImg;
 import me.cloyd1815.upimg.main.Main;
 
 public class Window extends JFrame implements ActionListener {
-
+//http://stackoverflow.com/questions/11006496/select-an-area-to-capture-using-the-mouse
 	private static final long serialVersionUID = 1L;
 	public static JPanel panel;
 	public static JButton button;
@@ -41,6 +40,7 @@ public class Window extends JFrame implements ActionListener {
 	public static JTextArea text;
 	public static TrayIcon trayIcon;
 	public static SystemTray tray;
+	public static PopupMenu popup;
 
 	public Window() {
 		panel = new JPanel();
@@ -54,12 +54,7 @@ public class Window extends JFrame implements ActionListener {
 		panel.add(label);
 		panel.add(text);
 		this.add(panel);
-
-		try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (Exception e) {
-			System.out.println("Unable to set LookAndFeel");
-		}
+		
 		if (SystemTray.isSupported()) {
 			tray = SystemTray.getSystemTray();
 
@@ -69,7 +64,7 @@ public class Window extends JFrame implements ActionListener {
 					System.exit(0);
 				}
 			};
-			PopupMenu popup = new PopupMenu();
+			popup = new PopupMenu();
 			MenuItem defaultItem = new MenuItem("Exit");
 			defaultItem.addActionListener(exitListener);
 			popup.add(defaultItem);
@@ -81,7 +76,24 @@ public class Window extends JFrame implements ActionListener {
 				}
 			});
 			popup.add(defaultItem);
-			trayIcon = new TrayIcon(image, "SystemTray Demo", popup);
+			defaultItem = new MenuItem("Take ScreenShot");
+			defaultItem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit()
+							.getScreenSize());
+					BufferedImage capture = null;
+					try {
+						capture = new Robot().createScreenCapture(screenRect);
+						File file = File.createTempFile("screenshot", ".PNG");
+						ImageIO.write(capture, "PNG", file);
+						UpImg.upimg(file);
+					} catch (IOException | AWTException | URISyntaxException e1) {
+						e1.printStackTrace();
+					}
+				}
+			});
+			popup.add(defaultItem);
+			trayIcon = new TrayIcon(image, "UpImg", popup);
 			trayIcon.setImageAutoSize(true);
 		} else {
 			System.out.println("system tray not supported");
