@@ -13,5 +13,6 @@ public class Main {
 		window.setSize(200, 100);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
+		window.setIconImage(Window.createImage("images/favicon.png", "icon"));
 	}
 }

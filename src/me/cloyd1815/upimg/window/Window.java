@@ -47,21 +47,23 @@ public class Window extends JFrame implements ActionListener {
 		button = new JButton("UpImg");
 		button.addActionListener(this);
 		label = new JLabel();
+		text = new JTextArea();
 
 		button.setToolTipText("Click to upload an image");
 		panel.add(button);
 		panel.add(label);
+		panel.add(text);
 		this.add(panel);
 
 		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
 			System.out.println("Unable to set LookAndFeel");
 		}
 		if (SystemTray.isSupported()) {
 			tray = SystemTray.getSystemTray();
 
-			Image image = createImage("/images/favicon.png", "tray icon");
+			Image image = createImage("images/favicon.png", "tray icon");
 			ActionListener exitListener = new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					System.exit(0);
@@ -112,7 +114,7 @@ public class Window extends JFrame implements ActionListener {
 				}
 			}
 		});
-		
+
 	}
 
 	@Override
@@ -123,7 +125,7 @@ public class Window extends JFrame implements ActionListener {
 			BufferedImage capture = null;
 			try {
 				capture = new Robot().createScreenCapture(screenRect);
-				File file = File.createTempFile("screenshot", ".png");
+				File file = File.createTempFile("screenshot", ".PNG");
 				ImageIO.write(capture, "PNG", file);
 				UpImg.upimg(file);
 			} catch (IOException | AWTException | URISyntaxException e1) {
@@ -131,15 +133,15 @@ public class Window extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
-	protected static Image createImage(String path, String description) {
-        URL imageURL = Main.class.getResource(path);
-         
-        if (imageURL == null) {
-            System.err.println("Resource not found: " + path);
-            return null;
-        } else {
-            return (new ImageIcon(imageURL, description)).getImage();
-        }
-    }
+
+	public static Image createImage(String path, String description) {
+		URL imageURL = Main.class.getResource(path);
+
+		if (imageURL == null) {
+			System.err.println("Resource not found: " + path);
+			return null;
+		} else {
+			return (new ImageIcon(imageURL, description)).getImage();
+		}
+	}
 }
