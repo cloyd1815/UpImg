@@ -31,7 +31,7 @@ import me.cloyd1815.upimg.UpImg;
 import me.cloyd1815.upimg.main.Main;
 
 public class Window extends JFrame implements ActionListener {
-//http://stackoverflow.com/questions/11006496/select-an-area-to-capture-using-the-mouse
+
 	private static final long serialVersionUID = 1L;
 	public static JPanel panel;
 	public static JButton button;
