@@ -17,9 +17,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 
 public class UpImg {
-	public static String upimg = "http://boboman13.net:8080";
+	public static String upimg = "http://upimg.me";
 	public static void upimg(File file) throws IOException, URISyntaxException {
-		URL url = new URL("http://boboman13.net:8080/upload");
+		URL url = new URL("http://upimg.me/upload");
 	    HttpClientBuilder client = HttpClientBuilder.create();
 	    HttpPost httpPost = new HttpPost(url.toURI()); //The POST request to send
 
@@ -33,7 +33,7 @@ public class UpImg {
 
 	    String str = "";
 	        str = response.getFirstHeader("Location").toString();
-	        upimg = str.replaceAll("Location: ", "http://boboman13.net:8080");
+	        upimg = str.replaceAll("Location: ", "http://upimg.me");
 	        StringSelection selection = new StringSelection(upimg);
 	        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	        clipboard.setContents(selection, selection);
