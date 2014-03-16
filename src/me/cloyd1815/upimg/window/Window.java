@@ -4,22 +4,14 @@ import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
-import java.awt.Rectangle;
-import java.awt.Robot;
 import java.awt.SystemTray;
-import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowStateListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import me.cloyd1815.upimg.UpImg;
 import me.cloyd1815.upimg.main.Main;
 
 public class Window extends JFrame implements ActionListener {
@@ -79,17 +70,7 @@ public class Window extends JFrame implements ActionListener {
 			defaultItem = new MenuItem("Take ScreenShot");
 			defaultItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Rectangle screenRect = new Rectangle(Toolkit
-							.getDefaultToolkit().getScreenSize());
-					BufferedImage capture = null;
-					try {
-						capture = new Robot().createScreenCapture(screenRect);
-						File file = File.createTempFile("screenshot", "PNG");
-						ImageIO.write(capture, "PNG", file);
-						UpImg.upimg(file);
-					} catch (IOException | AWTException | URISyntaxException e1) {
-						e1.printStackTrace();
-					}
+					new SnipIt();
 				}
 			});
 			popup.add(defaultItem);
@@ -132,17 +113,7 @@ public class Window extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button) {
-			Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit()
-					.getScreenSize());
-			BufferedImage capture = null;
-			try {
-				capture = new Robot().createScreenCapture(screenRect);
-				File file = new File("screenshot.png");
-				ImageIO.write(capture, "png", file);
-				UpImg.upimg(file);
-			} catch (IOException | AWTException | URISyntaxException e1) {
-				e1.printStackTrace();
-			}
+			new SnipIt();
 		}
 	}
 
