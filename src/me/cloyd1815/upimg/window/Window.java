@@ -54,7 +54,7 @@ public class Window extends JFrame implements ActionListener {
 		panel.add(label);
 		panel.add(text);
 		this.add(panel);
-		
+
 		if (SystemTray.isSupported()) {
 			tray = SystemTray.getSystemTray();
 
@@ -79,12 +79,12 @@ public class Window extends JFrame implements ActionListener {
 			defaultItem = new MenuItem("Take ScreenShot");
 			defaultItem.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Rectangle screenRect = new Rectangle(Toolkit.getDefaultToolkit()
-							.getScreenSize());
+					Rectangle screenRect = new Rectangle(Toolkit
+							.getDefaultToolkit().getScreenSize());
 					BufferedImage capture = null;
 					try {
 						capture = new Robot().createScreenCapture(screenRect);
-						File file = File.createTempFile("screenshot", ".PNG");
+						File file = File.createTempFile("screenshot", "PNG");
 						ImageIO.write(capture, "PNG", file);
 						UpImg.upimg(file);
 					} catch (IOException | AWTException | URISyntaxException e1) {
@@ -128,7 +128,7 @@ public class Window extends JFrame implements ActionListener {
 		});
 
 	}
-
+//8:00
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button) {
@@ -137,8 +137,8 @@ public class Window extends JFrame implements ActionListener {
 			BufferedImage capture = null;
 			try {
 				capture = new Robot().createScreenCapture(screenRect);
-				File file = File.createTempFile("screenshot", ".PNG");
-				ImageIO.write(capture, "PNG", file);
+				File file = new File("screenshot.png");
+				ImageIO.write(capture, "png", file);
 				UpImg.upimg(file);
 			} catch (IOException | AWTException | URISyntaxException e1) {
 				e1.printStackTrace();
