@@ -110,7 +110,6 @@ public class Window extends JFrame implements ActionListener {
 
 	}
 //8:00
-	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button) {
 			new SnipIt();

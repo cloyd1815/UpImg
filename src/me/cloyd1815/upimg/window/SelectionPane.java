@@ -13,8 +13,6 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +20,8 @@ import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 
 import me.cloyd1815.upimg.UpImg;
 
@@ -36,23 +32,15 @@ public class SelectionPane extends JPanel {
 	 */
 	private static final long serialVersionUID = -8398916652995091464L;
 	private JButton button;
-	private JLabel label;
 
 	public SelectionPane() {
-		button = new JButton("UpImg");
+		button = new JButton("Upload");
 		setOpaque(false);
-
-		label = new JLabel("Rectangle");
-		label.setOpaque(true);
-		label.setBorder(new EmptyBorder(4, 4, 4, 4));
-		label.setBackground(Color.GRAY);
-		label.setForeground(Color.WHITE);
 		setLayout(new GridBagLayout());
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		add(label, gbc);
 
 		gbc.gridy++;
 		add(button, gbc);
@@ -74,15 +62,6 @@ public class SelectionPane extends JPanel {
 				}
 			}
 		});
-
-		addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentResized(ComponentEvent e) {
-				label.setText("Rectangle " + getX() + "x" + getY() + "x"
-						+ getWidth() + "x" + getHeight());
-			}
-		});
-
 	}
 
 	@Override

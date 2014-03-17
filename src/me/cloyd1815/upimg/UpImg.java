@@ -1,6 +1,7 @@
 package me.cloyd1815.upimg;
 
 import java.awt.Toolkit;
+import java.awt.TrayIcon;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
@@ -8,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+
+import me.cloyd1815.upimg.window.Window;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -37,6 +40,8 @@ public class UpImg {
 	        StringSelection selection = new StringSelection(upimg + str);
 	        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 	        clipboard.setContents(selection, selection);
+	        if (Window.tray.getTrayIcons().length >= 1)
+	        	Window.trayIcon.displayMessage("Uploaded!", "Link copied to clipboard!", TrayIcon.MessageType.INFO);
 	}
 	
 	public BufferedImage resize(BufferedImage image) {
